@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A Bookstore document with an inbuilt DTD instead a seperate 'external' DTD -->
+<!DOCTYPE Bookstore [
+    <!-- We can use ID attributes to refer to other elements from within an element (also used for validation) -->
+    <!-- First there is an element Bookstore with a subelement called Book with an attribute ISBN number -->
+    <!ELEMENT Bookstore (Book | Author)+>
+    <!-- The element Book has a sub element Title -->
+    <!ELEMENT Book (Title)>
+    <!-- Now define the attributes for Book i.e. a compulsory ISBN number -->
+    <!ATTLIST Book ISBN CDATA #REQUIRED
+                   Price CDATA #IMPLIED
+                   Authors IDREFS #REQUIRED>
+    <!-- The Title element will have a string as its data -->
+    <!ELEMENT Title (#PCDATA)>
+    <!ELEMENT Author (Name)>
+    <!ATTLIST Author initials ID #REQUIRED>
+    <!ELEMENT Name (#PCDATA)>
+]>
+
+<Bookstore>
+    <Book ISBN="ISBN-ABCD1234" Authors="UB RP">
+        <Title>The adventures of Thomas</Title>
+    </Book>
+    <Book ISBN="ISBN-EFGH234" Price="$84" Authors="RP">
+        <Title>The adventures of Richard</Title>
+    </Book>
+    <Author initials="UB">
+        <Name>Usain Bolt</Name>
+    </Author>
+    <Author initials="RP">
+        <Name>Richard Prichardson</Name>
+    </Author>
+</Bookstore>
